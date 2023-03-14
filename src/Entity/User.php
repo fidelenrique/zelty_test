@@ -23,16 +23,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = [];
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Article::class)]
-    private $articles;
+//    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Article::class)]
+//    private $articles;
 
-    /**
-     * @return Collection|Article[]
-     */
-    public function getArticles(): Collection|array
-    {
-        return $this->articles;
-    }
+//    /**
+//     * @return Collection|Article[]
+//     */
+//    public function getArticles(): Collection|array
+//    {
+//        return $this->articles;
+//    }
 
     /**
      * @var string|null The hashed password

@@ -27,9 +27,9 @@ class Article
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $content = null;
 
-    #[ORM\Column(type: Types::class)]
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'articles')]
-    private ?object $author = null;
+//    #[ORM\Column(type: Types::class)]
+//    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'articles')]
+//    private ?object $author = null;
 
     #[ORM\Column(type: Types::TEXT, enumType: Status::class)]
     private ?string $status = null;
@@ -69,17 +69,17 @@ class Article
         return $this;
     }
 
-    public function getAuthor(): ?object
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(object $author): self
-    {
-        $this->author = $author;
-
-        return $this;
-    }
+//    public function getAuthor(): ?object
+//    {
+//        return $this->author;
+//    }
+//
+//    public function setAuthor(object $author): self
+//    {
+//        $this->author = $author;
+//
+//        return $this;
+//    }
 
     public function getStatus(): ?string
     {
