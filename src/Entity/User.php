@@ -24,7 +24,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private array $roles = [];
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Article::class)]
-    private $articles;
+    private ArrayCollection $articles;
 
     /**
      * @return Collection|Article[]
@@ -41,9 +41,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     /**
-     * @param $articles
      */
-    public function __construct($articles)
+    public function __construct()
     {
         $this->articles = new ArrayCollection();
     }
