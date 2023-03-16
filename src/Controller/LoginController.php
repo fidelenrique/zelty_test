@@ -16,7 +16,6 @@ class LoginController extends CommonController
     public function __construct(EntityManagerInterface $em)
     {
         parent::__construct($em);
-
         $this->repoUser = $this->em->getRepository(User::class);
     }
 

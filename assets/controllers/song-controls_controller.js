@@ -4,9 +4,9 @@ import axios from 'axios';
 /*
  * This is an example Stimulus controller!
  *
- * Any element with a data-controller="song-controls" attribute will cause
- * this controller to be executed. The name "song-controls" comes from the filename:
- * song-controls_controller.js -> "song-controls"
+ * Any element with a data-controller="article-controls" attribute will cause
+ * this controller to be executed. The name "article-controls" comes from the filename:
+ * article-controls_controller.js -> "article-controls"
  *
  * Delete this file or adapt it for your use!
  */

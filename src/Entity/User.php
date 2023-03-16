@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -25,12 +24,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = [];
 
-
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $firstName;
-
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Article::class)]
-    private ArrayCollection $articles;
 
     /**
      * @var string|null The hashed password
