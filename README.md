@@ -30,7 +30,7 @@ Entrer l'une de ses url et authentifiez-vous.
 ### zelty_test
 ```http://zelty_test.localhost/register ```
 ```http://zelty_test.localhost/login ```
-```http://zelty_test.localhost/api/articles/2 ```
+```http://zelty_test.localhost/api/articles/{id} ```
 
 ### Webmail (mailhog)
 ```http://127.0.0.1:8025```
