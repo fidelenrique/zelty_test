@@ -1,14 +1,50 @@
+# config/packages/security.yaml
 security:
+    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+    password_hashers:
+        # Use native password hasher, which auto-selects and migrates the best
+        # possible hashing algorithm (which currently is "bcrypt")
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+        App\Entity\User:
+            algorithm: auto
 
-when@test:
-    security:
-        password_hashers:
-            # By default, password hashers are resource intensive and take time. This is
-            # important to generate secure password hashes. In tests however, secure hashes
-            # are not important, waste resources and increase test times. The following
-            # reduces the work factor to the lowest possible values.
-            Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
-                algorithm: auto
-                cost: 4 # Lowest possible value for bcrypt
-                time_cost: 3 # Lowest possible value for argon
-                memory_cost: 10 # Lowest possible value for argon
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        # the name of your user provider can be anything
+        your_custom_user_provider:
+            id: App\Security\UserProvider
+
+        users:
+            entity:
+                class: App\Entity\User
+        backend_users:
+            memory:
+                users:
+                    # zelty
+                    john_admin: { password: '$2y$10$THN4UizTDTPUg0vCTsYbfezsNpCa7DGEWYdBznus.Lcm7Q5BbFJty', roles: ['ROLE_ADMIN'] }
+                    # admin
+                    jane_admin: { password: '$2y$10$B4n6FmwvN0i9uWYt4mcfLOdtidb/q2Z26VKVUpeGK7sKn6mtyHeo.', roles: ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN'] }
+
+        all_users:
+            chain:
+                providers: ['users', 'backend_users']
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            lazy: true
+#            provider: users_in_memory
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+    # - { path: ^/admin, roles: ROLE_ADMIN }
+    # - { path: ^/profile, roles: ROLE_USER }

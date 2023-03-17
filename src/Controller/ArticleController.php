@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Service\InfoCodes;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,21 +19,24 @@ class ArticleController extends CommonController
     #[Route('/api/articles/{id<\d+>}', name: 'api_articles_get_one', methods: ['GET'])]
     public function getArticle(int $id, LoggerInterface $logger): Response
     {
-        $repoArticle = $this->em->getRepository(Article::class);
-        /** @var Article $article */
-        $article = $repoArticle->findArticles('');
-
-        $article = [
-            'id' => $article->getId(),
-            'title' => $article->getTitle(),
-            'content' => $article->getContent(),
-
+        $articleList = [
+            'id' => null,
+            'title' => null,
+            'content' => null,
         ];
+
+        if (is_object($article = $this->getArticleById($id))) {
+            $articleList = [
+                'id' => $article->getId(),
+                'title' => $article->getTitle(),
+                'content' => $article->getContent(),
+            ];
+        }
 
         $logger->info('Returning API response for article {article}', [
             'article' => $id,
         ]);
 
-        return $this->json($article);
+        return $this->json($articleList);
     }
 }

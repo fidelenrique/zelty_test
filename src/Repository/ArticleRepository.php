@@ -42,7 +42,7 @@ class ArticleRepository extends ServiceEntityRepository
     /**
      * @return Article[] Returns an array of Article objects without the status param
      */
-    public function getArticles($value): array
+    public function getArticles($value, $id=null): array
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.status != :val')

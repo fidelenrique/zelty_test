@@ -14,21 +14,23 @@ de gérer des articles à partir d’une API.
 - **docker-compose**
 - 
 
-# Entrez mdp: root
+# DATABASE Entrez mdp: root
+DATABASE_URL="mysql://root:root@172.16.238.13:3306/zelty?serverVersion=mariadb-10.10.2&charset=utf8mb4"
 
-# Entrez mdp: root
+# MAILER Entrez gmail
+MAILER_DSN=gmail://adresse@gmail.com:mdp@localhost
 exit
 ```
 
 ## Démarrage
+```http://zelty_test.localhost/ ```
 
 Entrer l'une de ses url et authentifiez-vous.
 
-### test_technique
-```http://test_technique.localhost/```
-
-### mixed_vinyl
-```http://mixed_vinyl.localhost/ ```
+### zelty_test
+```http://zelty_test.localhost/register ```
+```http://zelty_test.localhost/login ```
+```http://zelty_test.localhost/api/articles/2 ```
 
 ### Webmail (mailhog)
 ```http://127.0.0.1:8025```

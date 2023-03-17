@@ -33,14 +33,6 @@ class LoginController extends CommonController
     #[Route('/api/hello/{name}', methods: ['GET'])]
     public function apiHello(string $name): JsonResponse
     {
-        $user = new User();
-        $user->setRoles(['ROLE_USER']);
-        $user->setEmail('freyesllerena33@gmail.com');
-        $user->setPassword('testpwd');
-        $user->setFirstName('Coucou');
-        $this->em->persist($user);
-        $this->em->flush();
-
         return $this->json([
             'name' => $name,
             'symfony' => 'rocks',

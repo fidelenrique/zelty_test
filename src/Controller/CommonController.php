@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Service\InfoCodes;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -47,5 +48,20 @@ class CommonController extends AbstractController
         }
 
         return $user;
+    }
+
+    /**
+     * @throws Exception
+     */
+    protected function getArticleById($id): Article
+    {
+        $repoArticle = $this->em->getRepository(Article::class);
+        $article = $repoArticle->findOneBy(['id' => $id, 'status' => Article::DRAFT])?? $repoArticle->findOneBy(['id' => $id, 'status' => Article::PUBLISHED]);
+
+        if (!$article instanceof Article) {
+            throw new Exception(InfoCodes::ART_NOT_FOUND, Response::HTTP_BAD_REQUEST);
+        }
+
+        return $article;
     }
 }

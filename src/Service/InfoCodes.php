@@ -7,5 +7,6 @@ namespace App\Service;
  */
 abstract class InfoCodes
 {
-    const USR_NOT_FOUND = 'USRNFND';
+    const USR_NOT_FOUND = 'USRNFND'; /** user not found  */
+    const ART_NOT_FOUND = 'ARTNFND'; /** article not found */
 }
