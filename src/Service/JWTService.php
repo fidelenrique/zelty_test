@@ -9,7 +9,7 @@ class JWTService
     // We generate the token
 
     /**
-     * Génération du JWT
+     * Generating the JWT
      * @param array $header
      * @param array $payload
      * @param string $secret
