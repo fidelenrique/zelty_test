@@ -17,6 +17,12 @@ use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class RegistrationController extends AbstractController
 {
+    const NO_REPLY_EMAIL = 'reply@gmail.com';
+    const NAME_NO_REPLY_EMAIL = 'No Reply';
+    const SUBJECT_EMAIL = 'Please Confirm your Email';
+    const HTML_TEMPLATE_EMAIL = 'registration/confirmation_email.html.twig';
+
+
     private EmailVerifier $emailVerifier;
 
     public function __construct(EmailVerifier $emailVerifier)
@@ -39,16 +45,19 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+            //
+            $user->setRoles(['ROLE_ADMIN']);
+            $user->setFirstName($form->get('firstName')->getData());
             $entityManager->persist($user);
             $entityManager->flush();
 
             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
-                    ->from(new Address('freyesllerena33@gmail.com', 'Fidel email'))
+                    ->from(new Address(self::NO_REPLY_EMAIL, self::NAME_NO_REPLY_EMAIL))
                     ->to($user->getEmail())
-                    ->subject('Please Confirm your Email')
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
+                    ->subject(self::SUBJECT_EMAIL)
+                    ->htmlTemplate(self::HTML_TEMPLATE_EMAIL)
             );
             // do anything else you need here, like send an email
 

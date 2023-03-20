@@ -18,7 +18,7 @@ de gérer des articles à partir d’une API.
 DATABASE_URL="mysql://root:root@172.16.238.13:3306/zelty?serverVersion=mariadb-10.10.2&charset=utf8mb4"
 
 # MAILER Entrez gmail
-MAILER_DSN=gmail://adresse@gmail.com:mdp@localhost
+MAILER_DSN=smtp://mail:1025
 exit
 ```
 
